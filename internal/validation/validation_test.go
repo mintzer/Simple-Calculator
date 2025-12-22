@@ -266,3 +266,73 @@ func TestValidationWorkflow(t *testing.T) {
 		})
 	}
 }
+
+// TestValidateNumber tests the error-returning validation function
+func TestValidateNumber(t *testing.T) {
+	// Test valid inputs
+	validInputs := []string{"123", "123.456", ".123", "-.123", "-0.123"}
+	for _, input := range validInputs {
+		t.Run("valid_"+input, func(t *testing.T) {
+			err := ValidateNumber(input)
+			if err != nil {
+				t.Errorf("ValidateNumber(%q) returned error: %v, want nil", input, err)
+			}
+		})
+	}
+
+	// Test invalid inputs
+	invalidInputs := []string{"", " ", "abc", "12.34.56"}
+	for _, input := range invalidInputs {
+		t.Run("invalid_"+input, func(t *testing.T) {
+			err := ValidateNumber(input)
+			if err == nil {
+				t.Errorf("ValidateNumber(%q) returned nil, want error", input)
+			}
+			if err != nil && err.Error() != ValidationError {
+				t.Errorf("ValidateNumber(%q) error = %q, want %q", input, err.Error(), ValidationError)
+			}
+		})
+	}
+}
+
+// TestValidateAndParseNumber tests the convenience function
+func TestValidateAndParseNumber(t *testing.T) {
+	testCases := []struct {
+		input       string
+		shouldValid bool
+		expectedVal float64
+		expectedInt bool
+	}{
+		{"123", true, 123.0, true},
+		{"123.456", true, 123.456, false},
+		{".123", true, 0.123, false},
+		{"-.123", true, -0.123, false},
+		{"", false, 0, false},
+		{"abc", false, 0, false},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.input, func(t *testing.T) {
+			val, isInt, err := ValidateAndParseNumber(tc.input)
+
+			if tc.shouldValid {
+				if err != nil {
+					t.Fatalf("ValidateAndParseNumber(%q) returned error: %v", tc.input, err)
+				}
+				if math.Abs(val-tc.expectedVal) > 0.0001 {
+					t.Errorf("ValidateAndParseNumber(%q) value = %v, want %v", tc.input, val, tc.expectedVal)
+				}
+				if isInt != tc.expectedInt {
+					t.Errorf("ValidateAndParseNumber(%q) isInt = %v, want %v", tc.input, isInt, tc.expectedInt)
+				}
+			} else {
+				if err == nil {
+					t.Errorf("ValidateAndParseNumber(%q) returned nil error, want validation error", tc.input)
+				}
+				if err != nil && err.Error() != ValidationError {
+					t.Errorf("ValidateAndParseNumber(%q) error = %q, want %q", tc.input, err.Error(), ValidationError)
+				}
+			}
+		})
+	}
+}

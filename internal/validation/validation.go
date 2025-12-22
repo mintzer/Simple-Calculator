@@ -1,6 +1,7 @@
 package validation
 
 import (
+	"errors"
 	"strconv"
 	"strings"
 )
@@ -101,4 +102,28 @@ func ParseNumber(s string) (float64, bool, error) {
 
 	// Return value and whether it was an integer format
 	return val, !hasDecimal, nil
+}
+
+// ValidationError is the standard error message for invalid number inputs.
+// This matches the exact error message from the Python source code (line 73).
+const ValidationError = "Enter a Valid number\ne.g. 123, 0.123, .123, -0.123, 123.456"
+
+// ValidateNumber validates a numeric string and returns an error if invalid.
+// This provides an error-returning interface that matches the task specification.
+// Returns nil if the input is valid, or an error with the standard validation message if invalid.
+func ValidateNumber(s string) error {
+	if !IsValidNumber(s) {
+		return errors.New(ValidationError)
+	}
+	return nil
+}
+
+// ValidateAndParseNumber is a convenience function that validates and parses a numeric string.
+// It combines ValidateNumber and ParseNumber into a single operation.
+// Returns the parsed value, whether it's an integer format, and an error if validation or parsing fails.
+func ValidateAndParseNumber(s string) (float64, bool, error) {
+	if err := ValidateNumber(s); err != nil {
+		return 0, false, err
+	}
+	return ParseNumber(s)
 }
