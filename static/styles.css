@@ -1,0 +1,228 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Main calculator container - approximates the 380x300 tkinter window */
+.calculator-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Title label (line 181: 'Python Calculator', green, bold underline) */
+.title {
+    color: green;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Input section (lines 185-188) */
+.input-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.number-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.number-input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+/* Result section - displays operation name and result (lines 183-184) */
+.result-section {
+    width: 100%;
+    margin-bottom: 20px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Operation display (e.g., "Summation") - styled based on operation
+   Addition: red text on #9ed8ee (light blue) background (lines 48, 66)
+   These styles are applied dynamically by JavaScript */
+.operation-display {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    min-height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Result display */
+.result-display {
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    min-height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+}
+
+/* Error message display (line 73: messagebox.showerror) */
+.error-message {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    background-color: #ffebee;
+    border: 1px solid #ef5350;
+    border-radius: 4px;
+    color: #c62828;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-line;
+    display: none;
+    text-align: center;
+}
+
+.error-message.visible {
+    display: block;
+}
+
+/* Button section (lines 190-200) */
+.button-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.operation-button {
+    flex: 1;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.operation-button:hover:not(:disabled) {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
+.operation-button:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.operation-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background-color: #e0e0e0;
+}
+
+/* Author section (lines 202-203) */
+.author-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.author-button {
+    padding: 8px 20px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.author-button:hover {
+    background-color: #e0e0e0;
+}
+
+.author-button:active {
+    transform: scale(0.95);
+}
+
+/* Color scheme classes for different operations - applied dynamically
+   These match the Python color schemes from the source code:
+   - Addition (lines 48, 66): red fg, #9ed8ee bg
+   - Subtraction (lines 80, 100): green fg, #ece7e2 bg
+   - Multiplication (lines 114, 133): blue fg, #cacba9 bg
+   - Division (lines 150, 169): yellow fg, #8dad96 bg */
+
+.color-add {
+    color: red;
+    background-color: #9ed8ee;
+}
+
+.color-subtract {
+    color: green;
+    background-color: #ece7e2;
+}
+
+.color-multiply {
+    color: blue;
+    background-color: #cacba9;
+}
+
+.color-divide {
+    color: yellow;
+    background-color: #8dad96;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 480px) {
+    .calculator-container {
+        padding: 20px;
+        max-width: 100%;
+    }
+
+    .button-section {
+        flex-wrap: wrap;
+    }
+
+    .operation-button {
+        min-width: calc(50% - 5px);
+    }
+}

@@ -103,15 +103,21 @@ go test -cover ./...
   - Floats: `123.456`, `0.123`, `-0.123`
   - Leading decimals: `.123`, `-.123`, `+.123`
 
-- **Arithmetic Operations**:
-  - Addition (Summation)
-  - Subtraction
-  - Multiplication
-  - Division
+- **Arithmetic Operations** (Milestone 1 - Addition only):
+  - ✅ Addition (Summation) - *Currently implemented*
+  - ⏳ Subtraction - *Coming in Milestone 2*
+  - ⏳ Multiplication - *Coming in Milestone 2*
+  - ⏳ Division - *Coming in Milestone 2*
 
 - **Web Interface**: Browser-based UI replacing the original tkinter GUI
+  - Clean, responsive design
+  - Operation-specific color schemes matching the original Python GUI
+  - Real-time validation and error messages
+  - Author information display
 
 - **REST API**: HTTP endpoints for programmatic access to calculator functions
+  - `POST /api/calculate` - Perform calculations
+  - `GET /health` - Health check endpoint
 
 ## Development
 
