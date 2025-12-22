@@ -51,7 +51,7 @@ This is a modernized version of the Simple Calculator, transformed from a Python
 
 ## Building the Application
 
-To build the application:
+To build all packages:
 
 ```bash
 go build ./...
@@ -63,18 +63,96 @@ To build the main executable:
 go build -o calculator ./cmd/calculator
 ```
 
+Or use the full path:
+
+```bash
+go build -o calculator cmd/calculator/main.go
+```
+
 ## Running the Application
 
-To run the application directly:
+### Quick Start
+
+To run the application directly without building:
 
 ```bash
 go run cmd/calculator/main.go
+```
+
+To run the built executable:
+
+```bash
+./calculator
 ```
 
 Once started, open your web browser and navigate to:
 ```
 http://localhost:8080
 ```
+
+### Configuration Options
+
+The application supports configuration through both environment variables and command-line flags. Command-line flags take precedence over environment variables.
+
+#### Environment Variables
+
+- **`PORT`**: Port number for the HTTP server (default: `8080`)
+- **`LOG_LEVEL`**: Logging level - `debug`, `info`, `warn`, or `error` (default: `info`)
+
+Example:
+```bash
+PORT=3000 LOG_LEVEL=debug go run cmd/calculator/main.go
+```
+
+Or with the built executable:
+```bash
+PORT=3000 LOG_LEVEL=debug ./calculator
+```
+
+#### Command-Line Flags
+
+- **`-port`**: Port to run the server on (overrides `PORT` environment variable)
+- **`-static-dir`**: Directory containing static files (default: `./static`)
+
+Example:
+```bash
+go run cmd/calculator/main.go -port 3000
+```
+
+Or:
+```bash
+./calculator -port 3000 -static-dir ./static
+```
+
+#### Configuration Examples
+
+Run on a different port:
+```bash
+PORT=9000 ./calculator
+# or
+./calculator -port 9000
+```
+
+Enable debug logging:
+```bash
+LOG_LEVEL=debug ./calculator
+```
+
+Combine environment variables and flags:
+```bash
+LOG_LEVEL=debug ./calculator -port 9000
+```
+
+### Graceful Shutdown
+
+The server supports graceful shutdown. To stop the server:
+- Press `Ctrl+C` (sends SIGINT)
+- Or send SIGTERM: `kill <pid>`
+
+The server will:
+1. Stop accepting new connections
+2. Wait for in-flight requests to complete (up to 10 seconds)
+3. Shut down cleanly
 
 ## Testing
 

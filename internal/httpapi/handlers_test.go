@@ -12,7 +12,7 @@ import (
 
 // TestHandleCalculate_SuccessfulAddition tests the calculate endpoint with valid addition inputs.
 func TestHandleCalculate_SuccessfulAddition(t *testing.T) {
-	router := SetupRouter()
+	router := SetupRouter("./static")
 
 	tests := []struct {
 		name             string
@@ -118,7 +118,7 @@ func TestHandleCalculate_SuccessfulAddition(t *testing.T) {
 
 // TestHandleCalculate_ValidationErrors tests the calculate endpoint with invalid inputs.
 func TestHandleCalculate_ValidationErrors(t *testing.T) {
-	router := SetupRouter()
+	router := SetupRouter("./static")
 
 	tests := []struct {
 		name          string
@@ -186,7 +186,7 @@ func TestHandleCalculate_ValidationErrors(t *testing.T) {
 
 // TestHandleCalculate_UnsupportedOperation tests the calculate endpoint with unsupported operations.
 func TestHandleCalculate_UnsupportedOperation(t *testing.T) {
-	router := SetupRouter()
+	router := SetupRouter("./static")
 
 	tests := []struct {
 		name      string
@@ -239,7 +239,7 @@ func TestHandleCalculate_UnsupportedOperation(t *testing.T) {
 
 // TestHandleCalculate_MalformedRequest tests the calculate endpoint with malformed JSON.
 func TestHandleCalculate_MalformedRequest(t *testing.T) {
-	router := SetupRouter()
+	router := SetupRouter("./static")
 
 	tests := []struct {
 		name    string
@@ -272,7 +272,7 @@ func TestHandleCalculate_MalformedRequest(t *testing.T) {
 
 // TestHandleHealth tests the health check endpoint.
 func TestHandleHealth(t *testing.T) {
-	router := SetupRouter()
+	router := SetupRouter("./static")
 
 	req, _ := http.NewRequest(http.MethodGet, "/health", nil)
 	w := httptest.NewRecorder()
