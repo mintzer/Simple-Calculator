@@ -1,12 +1,7 @@
-import './App.css'
+import Calculator from './ui/components/Calculator'
 
 function App() {
-  return (
-    <div className="app">
-      <h1>Calculator Loading...</h1>
-      <p>Simple Calculator - TypeScript Migration</p>
-    </div>
-  )
+  return <Calculator />
 }
 
 export default App
