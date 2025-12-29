@@ -1,0 +1,109 @@
+/**
+ * Operation-Specific Styling
+ *
+ * Color schemes for each calculator operation, matching the Python Tkinter source.
+ *
+ * Color Scheme Mapping from Python Source:
+ * - Addition (line 48, 66): Red text (#ff0000 or 'red') on light blue background (#9ed8ee)
+ * - Subtraction (line 80, 100): Green text on beige background (#ece7e2)
+ * - Multiplication (line 114, 133): Blue text on olive background (#cacba9)
+ * - Division (line 150, 169): Yellow text on sage green background (#8dad96)
+ *
+ * This file currently implements only the addition color scheme.
+ * Milestone 2 will add the remaining three operation styles.
+ */
+
+/* Addition Operation - Red text on light blue background */
+.addition {
+  color: red;
+  background-color: #9ed8ee;
+}
+
+/* Calculator Layout Styles */
+.calculator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.calculator-title {
+  color: green;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 30px;
+}
+
+.calculator-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.calculator-input {
+  width: 200px;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.calculator-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  min-height: 60px;
+}
+
+.result-label {
+  padding: 8px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  min-width: 150px;
+  text-align: center;
+}
+
+.result-value {
+  padding: 8px 20px;
+  font-size: 18px;
+  font-weight: normal;
+  border-radius: 4px;
+  min-width: 150px;
+  text-align: center;
+}
+
+.calculator-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.operation-button {
+  width: 50px;
+  height: 40px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  transition: background-color 0.2s;
+}
+
+.operation-button:hover {
+  background-color: #e0e0e0;
+}
+
+.operation-button:active {
+  background-color: #d0d0d0;
+}
