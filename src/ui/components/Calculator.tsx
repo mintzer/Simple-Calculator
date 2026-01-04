@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { isNumber, castToNumber, VALIDATION_ERROR_MESSAGE } from '../../core/validation';
 import { add } from '../../core/operations';
 import { OPERATION_STYLES } from '../../core/operationConfig';
+import { formatAuthorInfo } from '../../core/author';
 import '../styles/Calculator.css';
 
 export function Calculator() {
@@ -120,7 +121,7 @@ export function Calculator() {
         <button
           className="author-button"
           onClick={() => {
-            alert('Pranta Sarker\nBatch: 6th\nDepartment: CSE\nNorth East University Bangladesh');
+            alert(formatAuthorInfo());
           }}
         >
           Author

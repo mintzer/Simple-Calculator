@@ -20,10 +20,12 @@ describe('isNumber', () => {
 
     it('accepts decimals without leading zero', () => {
       expect(isNumber('.123')).toBe(true);
+      expect(isNumber('.5')).toBe(true);
     });
 
     it('accepts signed positive numbers', () => {
       expect(isNumber('+123')).toBe(true);
+      expect(isNumber('+456')).toBe(true);
       expect(isNumber('+0.123')).toBe(true);
       expect(isNumber('+.123')).toBe(true);
     });
@@ -32,6 +34,26 @@ describe('isNumber', () => {
       expect(isNumber('-123')).toBe(true);
       expect(isNumber('-0.123')).toBe(true);
       expect(isNumber('-.123')).toBe(true);
+    });
+
+    it('accepts zero variants', () => {
+      expect(isNumber('0')).toBe(true);
+      expect(isNumber('.0')).toBe(true);
+      expect(isNumber('0.0')).toBe(true);
+      expect(isNumber('-0')).toBe(true);
+      expect(isNumber('-.0')).toBe(true);
+    });
+
+    it('accepts very long numbers', () => {
+      expect(isNumber('123456789012345678901234567890')).toBe(true);
+      expect(isNumber('999999999999999999999999999999.123456789')).toBe(true);
+    });
+
+    // Python behavior: s[0] in ['-', '+', '.', '0', ' '] allows leading space,
+    // but then s[1:] must be all digits. This matches Python's is_number() function.
+    it('accepts space followed by digits (Python behavior)', () => {
+      expect(isNumber(' 123')).toBe(true);
+      expect(isNumber(' 0')).toBe(true);
     });
   });
 
@@ -60,12 +82,15 @@ describe('isNumber', () => {
       expect(isNumber('+')).toBe(false);
     });
 
+    // Single space should be rejected because after checking s[0] == ' ',
+    // the Python code requires s[1] to exist and be valid
     it('rejects single space character', () => {
       expect(isNumber(' ')).toBe(false);
     });
 
-    it('accepts space followed by digits', () => {
-      expect(isNumber(' 123')).toBe(true);
+    it('rejects strings with spaces in the middle', () => {
+      expect(isNumber('12 34')).toBe(false);
+      expect(isNumber('12. 34')).toBe(false);
     });
   });
 });
@@ -87,7 +112,7 @@ describe('castToNumber', () => {
   it('converts edge cases', () => {
     expect(castToNumber('.123')).toBe(0.123);
     expect(castToNumber('-.123')).toBe(-0.123);
-    expect(castToNumber('+.123')).toBe(0.123);
+    expect(castToNumber('+456')).toBe(456);
   });
 });
 
