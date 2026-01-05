@@ -1,6 +1,6 @@
-# Manual Testing Checklist for Task 3
+# Manual Testing Checklist
 
-This checklist verifies that the GUI framework and application structure have been implemented correctly.
+This checklist verifies that the calculator application has been implemented correctly.
 
 ## Window Creation
 - [ ] Window opens when application starts
@@ -51,8 +51,68 @@ This checklist verifies that the GUI framework and application structure have be
 - [ ] Application closes cleanly without hanging
 - [ ] No panics or error messages appear in console during testing
 
+## Task 4: Calculation and Integration Tests
+
+### Valid Input Tests
+- [ ] Enter "5" and "3", click +, verify "Summation" label and result "8"
+- [ ] Enter "10" and "4", click -, verify "Subtraction" label and result "6"
+- [ ] Enter "3" and "5", click *, verify "Multiplication" label and result "15"
+- [ ] Enter "12" and "3", click /, verify "Division" label and result "4"
+
+### Decimal Number Tests
+- [ ] Enter "5.5" and "2.5", click +, verify result "8"
+- [ ] Enter "7.5" and "2.5", click /, verify result "3"
+- [ ] Enter ".123" and "0.456", click +, verify result works
+- [ ] Enter "-.123" and "+.456", click +, verify signed decimals work
+
+### Integer Display Tests
+- [ ] Result "8" displays without decimal point (not "8.0")
+- [ ] Result "3" displays without decimal point
+- [ ] Result "3.5" displays with decimal point
+
+### Invalid Input Tests
+- [ ] Enter "abc" and "5", click +, verify error dialog appears with message:
+  "Enter a Valid number\ne.g. 123, 0.123, .123, -0.123, 123.456"
+- [ ] Enter "5" and "", click +, verify error dialog appears
+- [ ] Enter "12.34.56" and "5", click +, verify error dialog appears
+- [ ] After error dialog, application continues to function normally
+
+### Division by Zero Tests
+- [ ] Enter "10" and "0", click /, verify error dialog with division by zero message
+- [ ] After division by zero error, application continues to function
+
+### Author Dialog Tests
+- [ ] Click Author button, verify info dialog appears with:
+  "Pranta Sarker\nBatch: 6th\nDepartment: CSE\nNorth East University Bangladesh"
+- [ ] After closing dialog, application continues to function
+
+### Color Scheme Verification
+- [ ] Addition: Red text on light blue background (#9ed8ee)
+- [ ] Subtraction: Green text on beige background (#ece7e2)
+- [ ] Multiplication: Blue text on olive background (#cacba9)
+- [ ] Division: Yellow text on sage green background (#8dad96)
+
+### Edge Cases
+- [ ] Very large numbers (e.g., "999999" + "999999")
+- [ ] Very small decimals (e.g., "0.00001" * "0.00001")
+- [ ] Negative results (e.g., "5" - "10" = "-5")
+- [ ] Mixed integer and decimal operations (e.g., "5" * "2.5" = "12.5")
+
+## Automated Tests
+
+Run automated tests with:
+```bash
+cargo test
+```
+
+Expected: 13 tests passing, covering:
+- Number validation (integers, decimals, signed numbers)
+- Number parsing and formatting
+- All four arithmetic operations
+- Division by zero error handling
+- Edge cases
+
 ## Notes
-- Actual calculation logic (performing arithmetic) is out of scope for Task 3
-- Input validation and error dialogs are deferred to Task 4
-- Author information dialog is deferred to Task 4
-- This checklist focuses on GUI infrastructure and event handling
+- All tasks (1-4) are now complete
+- The calculator is fully functional with complete error handling
+- This checklist covers both GUI infrastructure and calculation logic
