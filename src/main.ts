@@ -5,10 +5,11 @@
  * arithmetic operations.
  */
 
+import './styles.css';
 import { isNumber } from './validation';
 import { castNumber } from './casting';
 import { add } from './operations';
-import { getInputValues, displayResult, showError, COLOR_SCHEMES } from './ui';
+import { getInputValues, displayResult, showError, showAuthorInfo, COLOR_SCHEMES } from './ui';
 
 /**
  * Handles the addition operation when the + button is clicked.
@@ -55,11 +56,18 @@ function initializeApp(): void {
     console.error('Plus button not found');
   }
 
-  // TODO: Wire up other operation buttons in future tasks
+  // Wire up the author button click handler
+  const authorButton = document.getElementById('author-btn');
+  if (authorButton) {
+    authorButton.addEventListener('click', showAuthorInfo);
+  } else {
+    console.error('Author button not found');
+  }
+
+  // TODO: Wire up other operation buttons in future milestones
   // - Subtraction (minus-btn)
   // - Multiplication (multiply-btn)
   // - Division (divide-btn)
-  // - Author button (author-btn)
 }
 
 // Initialize the app when the DOM is fully loaded

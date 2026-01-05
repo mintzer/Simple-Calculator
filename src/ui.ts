@@ -98,3 +98,17 @@ export function showError(message: string): void {
   // Using window.alert() to match the original Tkinter blocking dialog behavior
   alert(message);
 }
+
+/**
+ * Shows the author information dialog.
+ *
+ * Uses the browser's native alert dialog to match the blocking behavior
+ * of the original Tkinter messagebox.showinfo().
+ *
+ * Displays the author information exactly as in the original Python application.
+ */
+export function showAuthorInfo(): void {
+  // Author information from the original Python application (line 16)
+  const authorInfo = 'Pranta Sarker\nBatch: 6th\nDepartment: CSE\nNorth East University Bangladesh';
+  alert(authorInfo);
+}
