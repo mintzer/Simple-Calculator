@@ -1,10 +1,5 @@
 use eframe::egui;
-
-// Type alias for future integration with Task #1's number type
-// Once Task #1 is complete, this should be replaced with the actual number type
-// e.g., pub type Number = CalculatorNumber; or similar
-#[allow(dead_code)]
-pub type Number = f64; // Placeholder - will be replaced with Task #1's type
+use simple_calculator::{number, calculator};
 
 // Message enum for button click events as specified in task architecture
 // Names are specified in task requirements (PlusClicked, MinusClicked, etc.)
@@ -54,7 +49,7 @@ impl Operation {
                 background_color: egui::Color32::from_rgb(236, 231, 226),
             },
             Operation::Multiplication => OperationColor {
-                // Blue on olive (#cacba9)
+                // Blue on khaki (#cacba9)
                 label_color: egui::Color32::from_rgb(0, 0, 255),
                 background_color: egui::Color32::from_rgb(202, 203, 169),
             },
@@ -106,33 +101,86 @@ impl CalculatorApp {
     fn handle_message(&mut self, message: Message) {
         match message {
             Message::PlusClicked => {
-                self.operation = Operation::Addition;
-                self.result = "0".to_string();
-                // Actual calculation will be implemented in Task 4
+                self.perform_operation(Operation::Addition);
             }
             Message::MinusClicked => {
-                self.operation = Operation::Subtraction;
-                self.result = "0".to_string();
-                // Actual calculation will be implemented in Task 4
+                self.perform_operation(Operation::Subtraction);
             }
             Message::MultiplyClicked => {
-                self.operation = Operation::Multiplication;
-                self.result = "0".to_string();
-                // Actual calculation will be implemented in Task 4
+                self.perform_operation(Operation::Multiplication);
             }
             Message::DivideClicked => {
-                self.operation = Operation::Division;
-                self.result = "0".to_string();
-                // Actual calculation will be implemented in Task 4
+                self.perform_operation(Operation::Division);
             }
             Message::AuthorClicked => {
-                // Placeholder - actual dialog will be implemented in Task 4
-                println!("Author: Pranta Sarker");
-                println!("Batch: 6th");
-                println!("Department: CSE");
-                println!("North East University Bangladesh");
+                self.show_author_dialog();
             }
         }
+    }
+
+    fn perform_operation(&mut self, operation: Operation) {
+        // Set operation and initial result
+        self.operation = operation;
+        self.result = "0".to_string();
+
+        // Validate inputs
+        if !number::is_number(&self.input1) || !number::is_number(&self.input2) {
+            self.show_error_dialog(
+                "Enter a Valid number\ne.g. 123, 0.123, .123, -0.123, 123.456",
+            );
+            return;
+        }
+
+        // Parse numbers
+        let num1 = match number::parse_number(&self.input1) {
+            Ok(n) => n,
+            Err(_) => {
+                self.show_error_dialog("Invalid number format");
+                return;
+            }
+        };
+
+        let num2 = match number::parse_number(&self.input2) {
+            Ok(n) => n,
+            Err(_) => {
+                self.show_error_dialog("Invalid number format");
+                return;
+            }
+        };
+
+        // Perform calculation
+        let result = match operation {
+            Operation::Addition => calculator::add(num1, num2),
+            Operation::Subtraction => calculator::subtract(num1, num2),
+            Operation::Multiplication => calculator::multiply(num1, num2),
+            Operation::Division => match calculator::divide(num1, num2) {
+                Ok(r) => r,
+                Err(e) => {
+                    self.show_error_dialog(&e);
+                    return;
+                }
+            },
+            Operation::None => return,
+        };
+
+        // Display result
+        self.result = number::format_number(result);
+    }
+
+    fn show_error_dialog(&self, message: &str) {
+        rfd::MessageDialog::new()
+            .set_title("Error")
+            .set_description(message)
+            .set_level(rfd::MessageLevel::Error)
+            .show();
+    }
+
+    fn show_author_dialog(&self) {
+        rfd::MessageDialog::new()
+            .set_title("Author")
+            .set_description("Pranta Sarker\nBatch: 6th\nDepartment: CSE\nNorth East University Bangladesh")
+            .set_level(rfd::MessageLevel::Info)
+            .show();
     }
 }
 

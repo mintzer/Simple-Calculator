@@ -62,7 +62,13 @@ cargo run --release
 .
 ├── Cargo.toml          # Project dependencies and metadata
 ├── src/
-│   └── main.rs         # Main application code
+│   ├── lib.rs          # Library exports for testing
+│   ├── main.rs         # Main entry point
+│   ├── app.rs          # GUI application and event handlers
+│   ├── number.rs       # Number validation and parsing
+│   └── calculator.rs   # Arithmetic operations
+├── tests/
+│   └── integration_test.rs  # Integration tests for calculation flows
 └── README.md           # This file
 ```
 
@@ -71,12 +77,29 @@ cargo run --release
 - **Language**: Rust (edition 2021)
 - **GUI Framework**: egui 0.20.0 (immediate mode GUI)
 - **Application Framework**: eframe 0.20.0
+- **Dialog System**: rfd 0.10.0 (native file dialogs)
 
 ## Implementation Status
 
-### Task 3: GUI Framework and Application Structure ✓
+### Task 1: Number Validation and Parsing ✓
 
-This task establishes the complete GUI framework and application structure:
+- ✓ `is_number()` validation function implemented
+  - Supports integers (123, -456)
+  - Supports decimals (123.456, 0.123, .123)
+  - Supports signed decimals (-0.123, +123.45, -.123, +.456)
+- ✓ `parse_number()` parsing function implemented
+- ✓ `format_number()` display formatting (integers without decimals, floats with decimals)
+- ✓ Comprehensive unit tests for validation and parsing
+
+### Task 2: Calculation Operations ✓
+
+- ✓ `add()` function for addition
+- ✓ `subtract()` function for subtraction
+- ✓ `multiply()` function for multiplication
+- ✓ `divide()` function with division-by-zero error handling
+- ✓ Unit tests for all operations including edge cases
+
+### Task 3: GUI Framework and Application Structure ✓
 
 - ✓ GUI framework integrated (egui + eframe)
 - ✓ Main window created (380x300, non-resizable)
@@ -88,28 +111,53 @@ This task establishes the complete GUI framework and application structure:
 - ✓ Event handling infrastructure in place
 - ✓ Project builds and runs successfully
 
-### Pending Tasks
+### Task 4: GUI Integration with Calculation Logic ✓
 
-The following functionality will be implemented in future tasks:
+- ✓ Input reading from GUI fields
+- ✓ Input validation integrated with button handlers
+- ✓ Calculation operations called with validated inputs
+- ✓ Results displayed in GUI with proper formatting
+- ✓ Error dialogs for invalid input
+- ✓ Division by zero error dialog
+- ✓ Author information dialog
+- ✓ Color schemes applied for each operation
+- ✓ End-to-end functionality complete
 
-- **Task 1**: Number type definitions and basic types
-- **Task 2**: Calculation logic (actual arithmetic operations)
-- **Task 4**: Input validation and error handling
-  - Integration of `is_number()` validation
-  - Error dialogs for invalid input
-  - Author information dialog
-  - Division by zero handling
-
-Currently, clicking operation buttons displays the operation name and shows "0" as a placeholder result. Actual calculations will be implemented in Task 4 when integrated with the calculation logic from Task 2 and validation from Task 1.
+**All tasks completed! The calculator is fully functional.**
 
 ## Architecture
 
-The application follows a simple immediate-mode GUI pattern:
+The application follows a modular architecture with clear separation of concerns:
 
-- **CalculatorApp**: Main application struct holding state (inputs, operation, result, colors)
-- **OperationColor**: Struct defining label and background colors for operations
-- **Event Handling**: Button clicks update application state and trigger UI updates
-- **UI Layout**: Vertical centered layout with horizontal spacing for button rows
+### Modules
+
+- **number.rs**: Number validation and parsing
+  - `is_number()`: Validates if a string is a valid number
+  - `parse_number()`: Parses a validated string to f64
+  - `format_number()`: Formats a number for display
+
+- **calculator.rs**: Arithmetic operations
+  - `add()`, `subtract()`, `multiply()`: Basic operations
+  - `divide()`: Division with Result type for error handling
+
+- **app.rs**: GUI application and event handling
+  - `CalculatorApp`: Main application struct holding state
+  - `Operation`: Enum for operation types
+  - `OperationColor`: Color scheme definitions
+  - Event handlers with validation and error dialogs
+
+- **main.rs**: Application entry point
+
+### Data Flow
+
+1. User clicks operation button
+2. Event handler reads input fields
+3. Validation checks using `is_number()`
+4. If invalid: show error dialog
+5. If valid: parse with `parse_number()`
+6. Perform calculation using calculator module
+7. Format result with `format_number()`
+8. Update GUI with operation name, color, and result
 
 ## Migration from Python
 
@@ -123,7 +171,10 @@ This Rust version replicates the behavior of the original Python/Tkinter calcula
 | `Label` widgets | `egui::Label` |
 | `.place()` positioning | `egui` spacing and layout functions |
 | Color config (`fg`, `bg`) | `egui::Color32` for both text and background |
-| `messagebox.showinfo()` | Console output (placeholder for Task 4) |
+| `messagebox.showinfo()` | `rfd::MessageDialog` with native dialogs |
+| `messagebox.showerror()` | `rfd::MessageDialog` with error level |
+| `is_number()` function | Rust `is_number()` with same behavior |
+| `casting()` function | `parse_number()` and `format_number()` |
 
 ## Development
 
@@ -137,10 +188,42 @@ The code passes all Rust quality checks:
 
 ### Testing
 
+To run all tests:
+
+```bash
+cargo test
+```
+
+The project includes comprehensive tests:
+
+**Unit Tests (13 tests):**
+- Number validation (`is_number()` with 20+ test cases)
+- Number parsing and formatting
+- All arithmetic operations
+- Division by zero error handling
+- Edge cases (negative numbers, decimals, mixed inputs)
+
+**Integration Tests (17 tests in `tests/integration_test.rs`):**
+- Valid addition, subtraction, multiplication, and division flows
+- Float division with proper formatting
+- Mixed type operations (integer + decimal)
+- Invalid input handling (abc, empty, malformed numbers)
+- Division by zero error flow
+- Negative results
+- Signed input handling
+- Integer vs decimal display formatting
+- Large numbers and very small decimals
+
+Test coverage:
+- ✓ 30 total tests passing (13 unit + 17 integration)
+- ✓ End-to-end calculation flows verified
+- ✓ Input validation and error handling verified
+- ✓ Result formatting verified
+
 GUI components are verified through:
 - Manual interaction testing
 - Visual verification of layout and colors
-- Event handler response testing
+- Error dialog behavior testing
 
 ## License
 
