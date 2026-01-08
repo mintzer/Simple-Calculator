@@ -1,0 +1,181 @@
+/**
+ * Calculator component styles.
+ * Implements operation-specific color schemes matching the Python Tkinter implementation.
+ */
+
+/* Container for centering the calculator */
+.calculator-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+/* Main calculator box */
+.calculator {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 380px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Title styling matching Python implementation */
+.calculator-title {
+  color: green;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+/* Input fields container */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Input field styling */
+.number-input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.number-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+/* Result display container with operation-specific styling */
+.result-container {
+  width: 100%;
+  padding: 15px;
+  margin: 20px 0;
+  border-radius: 4px;
+  text-align: center;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Addition operation color scheme: red text on #9ed8ee background */
+.addition-result {
+  background-color: #9ed8ee;
+  color: red;
+}
+
+/* Subtraction operation color scheme: green text on #ece7e2 background */
+.subtraction-result {
+  background-color: #ece7e2;
+  color: green;
+}
+
+/* Multiplication operation color scheme: blue text on #cacba9 background */
+.multiplication-result {
+  background-color: #cacba9;
+  color: blue;
+}
+
+/* Division operation color scheme: yellow text on #8dad96 background */
+.division-result {
+  background-color: #8dad96;
+  color: yellow;
+}
+
+/* Operation name display */
+.operation-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Result value display */
+.result-value {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+/* Error message display */
+.error-message {
+  font-size: 12px;
+  white-space: pre-line;
+  color: inherit;
+}
+
+/* Operation buttons container */
+.button-container {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Operation button styling */
+.operation-button {
+  width: 60px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.operation-button:hover {
+  background-color: #e0e0e0;
+}
+
+.operation-button:active {
+  background-color: #d0d0d0;
+}
+
+/* Author button styling */
+.author-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  margin-top: auto;
+  transition: background-color 0.2s;
+}
+
+.author-button:hover {
+  background-color: #e0e0e0;
+}
+
+.author-button:active {
+  background-color: #d0d0d0;
+}
+
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
