@@ -1,18 +1,9 @@
-import React from 'react'
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-
-// Placeholder App component for now - will be replaced with Calculator in Task 3
-function App() {
-  return (
-    <div>
-      <h1>Simple Calculator</h1>
-      <p>Under construction...</p>
-    </div>
-  )
-}
+import { Calculator } from './ui/components/Calculator'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <StrictMode>
+    <Calculator />
+  </StrictMode>,
 )
