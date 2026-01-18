@@ -9,13 +9,13 @@ import (
 
 // UIComponents holds references to all UI widgets that need to be accessed by handlers
 type UIComponents struct {
-	Input1           *widget.Entry
-	Input2           *widget.Entry
-	OperationLabel   *canvas.Text
-	ResultLabel      *canvas.Text
-	OperationBg      *canvas.Rectangle
-	ResultBg         *canvas.Rectangle
-	Window           fyne.Window
+	Input1         *widget.Entry
+	Input2         *widget.Entry
+	OperationLabel *canvas.Text
+	ResultLabel    *canvas.Text
+	OperationBg    *canvas.Rectangle
+	ResultBg       *canvas.Rectangle
+	Window         fyne.Window
 }
 
 // NewMainWindow creates and configures the main calculator window.
@@ -45,21 +45,20 @@ func NewMainWindow(app fyne.App) fyne.Window {
 	ui.Input2.SetPlaceHolder("Enter second number")
 
 	// Operation buttons (lines 190-200 in Python)
-	// All four buttons are created, but only + button is wired in Task 1
 	plusButton := widget.NewButton("+", func() {
 		handleAddition(ui)
 	})
 
 	minusButton := widget.NewButton("-", func() {
-		// Placeholder - will be implemented in Task 2
+		handleSubtraction(ui)
 	})
 
 	mulButton := widget.NewButton("*", func() {
-		// Placeholder - will be implemented in Task 2
+		handleMultiplication(ui)
 	})
 
 	divButton := widget.NewButton("/", func() {
-		// Placeholder - will be implemented in Task 2
+		handleDivision(ui)
 	})
 
 	// Create button row

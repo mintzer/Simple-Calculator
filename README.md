@@ -13,20 +13,19 @@ This calculator provides basic arithmetic operations (addition, subtraction, mul
 - Division by zero protection
 - Author information dialog
 
-## Current Status (Task 1)
+## Current Status
 
-**Fully Functional:**
+**All Features Fully Functional (Tasks 1 & 2 Complete):**
 - ✅ Addition operation with red/light-blue color scheme
+- ✅ Subtraction operation with green/beige color scheme
+- ✅ Multiplication operation with blue/olive color scheme
+- ✅ Division operation with yellow/sage-green color scheme
 - ✅ Author information dialog
 - ✅ Input validation for all number formats
-- ✅ All four arithmetic operations implemented and tested in business logic
+- ✅ Division by zero error handling
+- ✅ All arithmetic operations implemented, tested, and wired to UI
 
-**Placeholder (to be completed in Task 2):**
-- ⏳ Subtraction button handler
-- ⏳ Multiplication button handler
-- ⏳ Division button handler
-
-The other three operation buttons are visible in the UI but not yet wired to their handlers.
+All four operation buttons are fully functional and operational.
 
 ## Requirements
 
