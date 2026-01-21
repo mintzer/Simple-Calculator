@@ -112,6 +112,45 @@ func BuildMainWindow(w fyne.Window) {
 		parseHexColor(ColorAddition),
 	)
 
+	// Wire the subtraction button to the handler
+	subButton.OnTapped = makeOperationHandler(
+		w,
+		calc,
+		calc.Subtract,
+		entryA,
+		entryB,
+		resultLabel,
+		opText,
+		"Subtraction",
+		parseHexColor(ColorSubtraction),
+	)
+
+	// Wire the multiplication button to the handler
+	mulButton.OnTapped = makeOperationHandler(
+		w,
+		calc,
+		calc.Multiply,
+		entryA,
+		entryB,
+		resultLabel,
+		opText,
+		"Multiplication",
+		parseHexColor(ColorMultiplication),
+	)
+
+	// Wire the division button to the handler
+	divButton.OnTapped = makeOperationHandler(
+		w,
+		calc,
+		calc.Divide,
+		entryA,
+		entryB,
+		resultLabel,
+		opText,
+		"Division",
+		parseHexColor(ColorDivision),
+	)
+
 	// Create colored backgrounds for buttons
 	// Note: Fyne v2.2.1 doesn't support container.NewStack, so we use MaxLayout
 	// which layers widgets with the first being the background
