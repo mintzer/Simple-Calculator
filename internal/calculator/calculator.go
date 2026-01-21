@@ -11,18 +11,18 @@ func New() *Calculator {
 }
 
 // Add performs addition of two float64 values
-func (c *Calculator) Add(a, b float64) float64 {
-	return a + b
+func (c *Calculator) Add(a, b float64) (float64, error) {
+	return a + b, nil
 }
 
 // Subtract performs subtraction of two float64 values
-func (c *Calculator) Subtract(a, b float64) float64 {
-	return a - b
+func (c *Calculator) Subtract(a, b float64) (float64, error) {
+	return a - b, nil
 }
 
 // Multiply performs multiplication of two float64 values
-func (c *Calculator) Multiply(a, b float64) float64 {
-	return a * b
+func (c *Calculator) Multiply(a, b float64) (float64, error) {
+	return a * b, nil
 }
 
 // Divide performs division of two float64 values.

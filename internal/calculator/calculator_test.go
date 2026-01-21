@@ -39,7 +39,10 @@ func TestAdd(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := calc.Add(tt.a, tt.b)
+			result, err := calc.Add(tt.a, tt.b)
+			if err != nil {
+				t.Errorf("Add(%v, %v) unexpected error: %v", tt.a, tt.b, err)
+			}
 			if !floatEquals(result, tt.expected) {
 				t.Errorf("Add(%v, %v) = %v; want %v", tt.a, tt.b, result, tt.expected)
 			}
@@ -65,7 +68,10 @@ func TestSubtract(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := calc.Subtract(tt.a, tt.b)
+			result, err := calc.Subtract(tt.a, tt.b)
+			if err != nil {
+				t.Errorf("Subtract(%v, %v) unexpected error: %v", tt.a, tt.b, err)
+			}
 			if result != tt.expected {
 				t.Errorf("Subtract(%v, %v) = %v; want %v", tt.a, tt.b, result, tt.expected)
 			}
@@ -91,7 +97,10 @@ func TestMultiply(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := calc.Multiply(tt.a, tt.b)
+			result, err := calc.Multiply(tt.a, tt.b)
+			if err != nil {
+				t.Errorf("Multiply(%v, %v) unexpected error: %v", tt.a, tt.b, err)
+			}
 			if result != tt.expected {
 				t.Errorf("Multiply(%v, %v) = %v; want %v", tt.a, tt.b, result, tt.expected)
 			}
@@ -229,7 +238,7 @@ func TestFormatResultWithCalculations(t *testing.T) {
 	calc := New()
 
 	// Test that integer results are formatted without decimals
-	result := calc.Add(2.0, 3.0)
+	result, _ := calc.Add(2.0, 3.0)
 	formatted := FormatResult(result)
 	if formatted != "5" {
 		t.Errorf("Add result formatted as %q; want \"5\"", formatted)
