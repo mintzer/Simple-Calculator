@@ -87,7 +87,7 @@ class CalculatorApp(tk.Tk):
         self._showtemplabel.place(relx=0.5, rely=0.5, anchor="center")
 
         self._showlabel.insert(0, result)
-        self._showlabel.place(relx=0.6, rely=0.6, anchor="center")
+        self._showlabel.place(relx=0.5, rely=0.6, anchor="center")
 
     def _on_plus(self) -> None:
         """Handle the addition button press."""
