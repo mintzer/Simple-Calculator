@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling>=1.21"]
+build-backend = "hatchling.build"
+
+[project]
+name = "simple-calculator"
+version = "1.0.0"
+description = "A simple two-operand calculator with a tkinter GUI"
+requires-python = ">=3.12"
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+simple-calculator = "simple_calculator.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["simple_calculator"]
