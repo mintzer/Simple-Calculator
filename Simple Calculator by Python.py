@@ -9,6 +9,28 @@ Platfrom: Pycharm Community Version
 """
 
 
+import os;
+import sys;
+
+# --- Runtime configuration -------------------------------------------------
+# Validate configuration before importing the GUI toolkit so a missing key
+# fails fast regardless of whether tkinter is available.
+#
+# A license key is required for the calculator to start. Supply it via the
+# CALCULATOR_LICENSE_KEY environment variable. There is no default: without a
+# value the app refuses to run.
+LICENSE_KEY = os.environ.get("CALCULATOR_LICENSE_KEY", "").strip();
+if not LICENSE_KEY:
+    sys.stderr.write(
+        "ERROR: CALCULATOR_LICENSE_KEY is not set. "
+        "Set it to your license key to start the calculator.\n"
+    );
+    sys.exit(1);
+
+# Window title is read from the environment so the app can be run with a
+# custom title per environment. Falls back to a default when unset.
+WINDOW_TITLE = os.environ.get("CALCULATOR_WINDOW_TITLE", "My First Python Calculator");
+
 from tkinter import *;
 from tkinter import messagebox;
 
@@ -176,7 +198,7 @@ def actionDiv():
         messagebox.showerror("Error", "Enter a Valid number\ne.g. 123, 0.123, .123, -0.123, 123.456")
 
 root = Tk();
-root.title('My First Python Calculator');
+root.title(WINDOW_TITLE);
 root.geometry('380x300+200+250');
 Titlelabel = Label(root, fg = 'green' , font = 'none 10 bold underline' ,text = 'Python Calculator', compound = CENTER)
 Titlelabel.place(relx=0.5, rely=0.1, anchor='center')

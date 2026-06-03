@@ -27,6 +27,22 @@ For Linux
 
 </ul>
 
+# Configuration
+
+The app reads two environment variables at startup:
+
+<ul>
+<li> <b>CALCULATOR_LICENSE_KEY</b> (required, secret): your license key. The calculator exits immediately if this is not set, so you must provide a value before running. </li>
+<li> <b>CALCULATOR_WINDOW_TITLE</b> (optional): the window title to use when running. Defaults to "My First Python Calculator". </li>
+</ul>
+
+Copy `.env.example` to `.env` and fill in `CALCULATOR_LICENSE_KEY`, then run:
+
+```bash
+export CALCULATOR_LICENSE_KEY=your-license-key-here
+python "Simple Calculator by Python.py"
+```
+
 # Built in
 <ul> <li> python 3.x  <br/></li> <li> tkinter python <br/> </li> </ul>
 
