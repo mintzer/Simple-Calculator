@@ -5,6 +5,10 @@ from tkinter import messagebox
 
 from calculator.logic import parse_number, add, subtract, multiply, divide
 
+_INVALID_NUMBER_MSG = (
+    "Enter a Valid number\ne.g. 123, 0.123, .123, -0.123, 123.456"
+)
+
 
 class CalculatorApp:
     """Four-operation desktop calculator built with tkinter."""
@@ -81,9 +85,7 @@ class CalculatorApp:
             a = parse_number(self.number_entry1.get())
             b = parse_number(self.number_entry2.get())
         except ValueError:
-            messagebox.showerror(
-                "Error", "Enter a Valid number\ne.g. 123, 0.123, .123, -0.123, 123.456"
-            )
+            messagebox.showerror("Error", _INVALID_NUMBER_MSG)
             return
 
         result = add(a, b)
@@ -103,9 +105,7 @@ class CalculatorApp:
             a = parse_number(self.number_entry1.get())
             b = parse_number(self.number_entry2.get())
         except ValueError:
-            messagebox.showerror(
-                "Error", "Enter a Valid number\ne.g. 123, 0.123, .123, -0.123, 123.456"
-            )
+            messagebox.showerror("Error", _INVALID_NUMBER_MSG)
             return
 
         result = subtract(a, b)
@@ -125,9 +125,7 @@ class CalculatorApp:
             a = parse_number(self.number_entry1.get())
             b = parse_number(self.number_entry2.get())
         except ValueError:
-            messagebox.showerror(
-                "Error", "Enter a Valid number\ne.g. 123, 0.123, .123, -0.123, 123.456"
-            )
+            messagebox.showerror("Error", _INVALID_NUMBER_MSG)
             return
 
         result = multiply(a, b)
@@ -147,9 +145,7 @@ class CalculatorApp:
             a = parse_number(self.number_entry1.get())
             b = parse_number(self.number_entry2.get())
         except ValueError:
-            messagebox.showerror(
-                "Error", "Enter a Valid number\ne.g. 123, 0.123, .123, -0.123, 123.456"
-            )
+            messagebox.showerror("Error", _INVALID_NUMBER_MSG)
             return
 
         try:
