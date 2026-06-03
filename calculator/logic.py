@@ -5,6 +5,12 @@ import math
 type Number = int | float
 
 
+def _as_number(value: float) -> Number:
+    """Return *value* as int if it is a whole number, otherwise as float."""
+    int_value = int(value)
+    return int_value if value == int_value else value
+
+
 def parse_number(s: str) -> int | float:
     """Parse a string into an int or float.
 
@@ -20,10 +26,7 @@ def parse_number(s: str) -> int | float:
         raise ValueError(f"Invalid number: {s!r}")
     if math.isinf(value) or math.isnan(value):
         raise ValueError(f"Invalid number: {s!r}")
-    int_value = int(value)
-    if value == int_value:
-        return int_value
-    return value
+    return _as_number(value)
 
 
 def add(a: Number, b: Number) -> Number:
@@ -54,7 +57,4 @@ def divide(a: Number, b: Number) -> Number:
     result = a / b
     if math.isinf(result) or math.isnan(result):
         raise ValueError(f"Result is not a finite number: {result}")
-    int_result = int(result)
-    if result == int_result:
-        return int_result
-    return result
+    return _as_number(result)
