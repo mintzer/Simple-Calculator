@@ -1,5 +1,7 @@
 """Pure arithmetic logic for the calculator — no GUI dependencies."""
 
+import math
+
 type Number = int | float
 
 
@@ -15,6 +17,8 @@ def parse_number(s: str) -> int | float:
     try:
         value = float(s)
     except ValueError:
+        raise ValueError(f"Invalid number: {s!r}")
+    if math.isinf(value) or math.isnan(value):
         raise ValueError(f"Invalid number: {s!r}")
     int_value = int(value)
     if value == int_value:
@@ -48,6 +52,8 @@ def divide(a: Number, b: Number) -> Number:
     if b == 0:
         raise ValueError("Division by zero is not allowed")
     result = a / b
+    if math.isinf(result) or math.isnan(result):
+        raise ValueError(f"Result is not a finite number: {result}")
     int_result = int(result)
     if result == int_result:
         return int_result

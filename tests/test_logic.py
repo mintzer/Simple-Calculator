@@ -29,7 +29,7 @@ def test_parse_number_valid(s: str, expected: int | float, expected_type: type) 
 
 @pytest.mark.parametrize(
     "s",
-    ["-", "+", "+.", "", "abc", "1.2.3", "--1"],
+    ["-", "+", "+.", "", "abc", "1.2.3", "--1", "inf", "-inf", "infinity", "-infinity"],
 )
 def test_parse_number_invalid(s: str) -> None:
     with pytest.raises(ValueError):
