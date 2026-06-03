@@ -181,10 +181,10 @@ class TestDivideZeroDivisor:
         # Confirm ZeroDivisionError is NOT raised (it would be a subclass issue otherwise)
         try:
             divide(5, 0)
+        except ValueError:
+            pass  # correct — expected exception
         except ZeroDivisionError:
             pytest.fail("divide(5, 0) raised ZeroDivisionError instead of ValueError")
-        except ValueError:
-            pass  # correct
 
 
 # ---------------------------------------------------------------------------
